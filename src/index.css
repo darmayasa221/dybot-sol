@@ -1,68 +1,137 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+@theme {
+  --color-primary: #3b82f6; /* blue-500 */
+  --color-primary-dark: #2563eb; /* blue-600 */
+  --color-primary-light: #60a5fa; /* blue-400 */
+  --color-secondary: #10b981; /* emerald-500 */
+  --color-secondary-dark: #059669; /* emerald-600 */
+  --color-secondary-light: #34d399; /* emerald-400 */
+  --color-danger: #ef4444; /* red-500 */
+  --color-danger-dark: #dc2626; /* red-600 */
+  --color-danger-light: #f87171; /* red-400 */
+  --color-warning: #f59e0b; /* amber-500 */
+  --color-warning-dark: #d97706; /* amber-600 */
+  --color-warning-light: #fbbf24; /* amber-400 */
+  --color-dark-bg: #111827; /* gray-900 */
+  --color-light-bg: #f3f4f6; /* gray-100 */
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-button: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-popup: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --transition-default: all 0.3s ease;
+}
+
+/* Base styles */
+html {
+  @apply text-gray-900 dark:text-white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  @apply bg-gray-100 dark:bg-gray-900;
+  @apply transition-colors duration-200;
+  margin: 0;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+#root {
+  @apply h-screen;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+::-webkit-scrollbar-track {
+  @apply bg-gray-200 dark:bg-gray-800;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600;
+  @apply rounded-full;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Focus outlines */
+*:focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4;
+}
+
+/* Button styles */
+.btn {
+  @apply px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 ;
+}
+
+.btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600 text-white focus:ring-blue-500;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white focus:ring-gray-500;
+}
+
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-600 text-white focus:ring-red-500;
+}
+
+.btn-sm {
+  @apply px-3 py-1 text-sm;
+}
+
+.btn-lg {
+  @apply px-5 py-3 text-lg;
+}
+
+/* Form controls */
+.input, .select, .textarea {
+  @apply w-full px-3 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-500 ;
+  @apply text-gray-900 dark:text-white;
+}
+
+.input-error {
+  @apply border-red-500 focus:ring-red-500 focus:border-red-500;
+}
+
+/* Active/hover animations */
+.hover-lift {
+  @apply transition-transform duration-200;
+}
+
+.hover-lift:hover {
+  @apply -translate-y-1;
+}
+
+/* Custom animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  a:hover {
-    color: #747bff;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+
+/* Sidebar active indicator */
+.sidebar-indicator {
+  @apply absolute left-0 w-1 bg-blue-500 rounded-r transition-all;
 }
